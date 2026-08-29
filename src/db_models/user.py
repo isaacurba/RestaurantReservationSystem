@@ -9,8 +9,11 @@ class User(Base):
     __tablename__ = "users"
 
     id: Mapped[int] = Column(Integer, primary_key=True, autoincrement=True)
+
     full_name: Mapped[str] = Column(String(100), nullable=False)
+
     email: Mapped[str] = Column(String(100), unique=True, nullable=False)
+
     password: Mapped[str] = Column(String(100), nullable=False)
 
     role: Mapped[UserRole] = Column(Enum(UserRole), default=UserRole.CUSTOMER, nullable=False)
