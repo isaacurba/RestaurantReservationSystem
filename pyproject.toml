@@ -5,9 +5,17 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.141.1",
     "pydantic>=2.13.4",
+    "pymysql[rsa]>=1.2.0",
+    "sqlalchemy>=2.0.52",
 ]
 
 [tool.uv.workspace]
 members = [
     "restaurant_ordering_system",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.1.1",
 ]
