@@ -3,7 +3,7 @@ from src.exceptions.user_not_found_exception import UserNotFoundException
 from src.dtos.user import UserLogin, UserResponse, UserCreate
 from src.exceptions.user_already_exist_exception import UserAlreadyExistsException
 from src.services.auth_service import AuthService
-from utils.mapper import Mapper
+from src.utils.mapper import Mapper
 
 
 class AuthServiceImpl(AuthService):
