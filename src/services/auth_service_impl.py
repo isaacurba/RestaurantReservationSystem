@@ -1,3 +1,5 @@
+from src.exceptions.invalid_credentials_exception import InvalidCredentialException
+from src.exceptions.user_not_found_exception import UserNotFoundException
 from src.dtos.user import UserLogin, UserResponse, UserCreate
 from src.exceptions.user_already_exist_exception import UserAlreadyExistsException
 from src.services.auth_service import AuthService
@@ -18,12 +20,12 @@ class AuthServiceImpl(AuthService):
         saved_user = self.repository.save(user)
         return UserResponse.model_validate(saved_user)
 
-
-
-
-
-
-
-
     def login(self, user_data: UserLogin) -> UserResponse:
-        pass
+        existing_user = self.repository.find_by_email(user_data.email)
+        if existing_user is None:
+            raise UserNotFoundException(user_data.email)
+        if existing_user.password != user_data.password:
+            raise InvalidCredentialException("Invalid credentials")
+        existing_user.is_active = True
+        saved_user = self.repository.save(existing_user)
+        return UserResponse.model_validate(saved_user)
