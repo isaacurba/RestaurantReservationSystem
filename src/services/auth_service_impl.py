@@ -14,7 +14,7 @@ class AuthServiceImpl(AuthService):
     def register(self, user_data: UserCreate) -> UserResponse:
         existing_user = self.repository.find_by_email(user_data.email)
         if existing_user is not None:
-            raise UserAlreadyExistsException(user_data.email)
+            raise UserAlreadyExistsException(f"user with email {user_data.email} already exists")
 
         user = Mapper.map(self, user_data)
         saved_user = self.repository.save(user)
@@ -23,7 +23,7 @@ class AuthServiceImpl(AuthService):
     def login(self, user_data: UserLogin) -> UserResponse:
         existing_user = self.repository.find_by_email(user_data.email)
         if existing_user is None:
-            raise UserNotFoundException(user_data.email)
+            raise UserNotFoundException(f"user with email {user_data.email} does not exist")
         if existing_user.password != user_data.password:
             raise InvalidCredentialException("Invalid credentials")
         existing_user.is_active = True
