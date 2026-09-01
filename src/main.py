@@ -1,10 +1,21 @@
-from src.database import engine
-from src.database import Base
-from src.db_models.user import User
-from src.db_models.menu import Menu
-from src.db_models.menu_item import MenuItem
-from src.db_models.order import Order
-from src.db_models.order_item import OrderItem
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+from fastapi import Request
+
+from src.exceptions import AppException
+from src.router.auth_router import router as auth_router
+from src.database import Base, engine
 
 Base.metadata.create_all(bind=engine)
 print("Database tables created successfully")
+
+app = FastAPI(title="Restaurant Ordering System")
+
+@app.exception_handler(AppException)
+async def app_exception_handler(request: Request, exception: AppException):
+    return JSONResponse(
+        status_code=exception.status_code,
+        content={"detail": str(exception)},
+    )
+
+app.include_router(auth_router)
