@@ -10,7 +10,7 @@ class MenuItem(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
-    menu_id: Mapped[int] = mapped_column(ForeignKey("menus.id"), nullable=False)
+    menu_id: Mapped[int] = mapped_column(ForeignKey("menus.id"),nullable=False)
 
     name: Mapped[str] = mapped_column(String(100), nullable=False)
 
