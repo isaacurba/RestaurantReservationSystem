@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from src.controller.auth_controller import AuthController
-from src.dtos.user import UserCreate, UserLogin, UserResponse
+from src.schemas.user import UserCreate, UserLogin, UserResponse
 from src.repositories.user_repository_impl import UserRepositoryImpl
 from src.database import SessionLocal
 from src.services.auth_service_impl import AuthServiceImpl

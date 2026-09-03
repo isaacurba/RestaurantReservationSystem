@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.dtos.user import UserCreate, UserLogin, UserResponse
+from src.schemas.user import UserCreate, UserLogin, UserResponse
 
 
 class AuthService(ABC):

@@ -1,4 +1,4 @@
-from src.dtos.user import UserCreate, UserLogin, UserResponse
+from src.schemas.user import UserCreate, UserLogin, UserResponse
 from src.services.auth_service import AuthService
 
 
