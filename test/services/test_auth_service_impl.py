@@ -3,7 +3,7 @@ import pytest
 from src.exceptions import AppException
 from src.database import SessionLocal
 from src.db_models.user import User
-from src.dtos.user import UserCreate, UserLogin
+from src.schemas.user import UserCreate, UserLogin
 from src.models.user_role import UserRole
 from src.repositories.user_repository_impl import UserRepositoryImpl
 from src.services.auth_service_impl import AuthServiceImpl
